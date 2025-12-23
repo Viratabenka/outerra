@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Kitchen3DViewer from "./Kitchen3DViewer";
 
 interface KitchenModel {
   id: number;
@@ -355,8 +356,26 @@ export default function Configurator() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
+          {/* 3D Viewer - Full Width Above on Mobile, Sidebar on Desktop */}
+          <div className="lg:col-span-1 order-2 lg:order-1">
+            <div className="bg-white rounded-2xl shadow-xl p-4 sticky top-24">
+              <h3 className="text-xl font-serif font-bold text-gray-900 mb-4">
+                3D Preview
+              </h3>
+              <div className="aspect-square w-full">
+                <Kitchen3DViewer
+                  selectedModel={selectedModel}
+                  selectedModules={selectedModules}
+                  selectedMaterials={selectedMaterials}
+                  autoRotate={selectedModel !== null}
+                  rotationSpeed={0.5}
+                />
+              </div>
+            </div>
+          </div>
+
           {/* Main Configuration Area */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 order-1 lg:order-2">
             <div className="bg-white rounded-2xl shadow-xl p-8">
               {/* Step 1: Select Kitchen Model */}
               {currentStep === 1 && (
